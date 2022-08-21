@@ -6,6 +6,13 @@ public class ToyRobotSimulator {
         Scanner scanner = new Scanner(System.in);
         String commandStr;
         while (!(commandStr = scanner.nextLine().toUpperCase()).equals("EXIT")) {
+            if(isPlaceCommand(commandStr)) {
+                place();
+            } else if(Command.isValid(commandStr)) {
+                execute(commandStr);
+            } else {
+                System.out.printf("Command \"%s\" not supported.%n", commandStr);
+            }
         }
     }
 
@@ -29,7 +36,7 @@ public class ToyRobotSimulator {
     static int PLACE_COMMAND_LENGTH = 2;
     static int PLACE_COMMAND_INDEX = 0;
     static int PLACE_COMMAND_PARAMS_INDEX = 1;
-    static int PLACE_COMMAND_PARAMS_LENGTH = 2;
+    static int PLACE_COMMAND_PARAMS_LENGTH = 3;
     static int PLACE_COMMAND_PARAMS_X_INDEX = 0;
     static int PLACE_COMMAND_PARAMS_Y_INDEX = 1;
     static int PLACE_COMMAND_PARAMS_ORIENTATION_INDEX = 2;
