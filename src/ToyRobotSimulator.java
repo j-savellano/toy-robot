@@ -5,13 +5,14 @@ public class ToyRobotSimulator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String commandStr;
-        while (!(commandStr = scanner.nextLine().toUpperCase()).equals("EXIT")) {
+        while (scanner.hasNextLine()) {
+            commandStr = scanner.nextLine();
             if(isPlaceCommand(commandStr)) {
                 place();
             } else if(Command.isValid(commandStr)) {
                 execute(commandStr);
             } else {
-                System.out.printf("Command \"%s\" not supported.%n", commandStr);
+                System.out.printf("Invalid \"%s\" command.%n", commandStr);
             }
         }
     }
@@ -19,13 +20,13 @@ public class ToyRobotSimulator {
     /**
      * Robot placeholder variables
      */
-    static int X;
-    static int Y;
-    static Orientation ORIENTATION;
+    static int ACTUAL_POSITION_X = 0;
+    static int ACTUAL_POSITION_Y = 0 ;
+    static Orientation ACTUAL_ORIENTATION = null;
 
-    static int INIT_X;
-    static int INIT_Y;
-    static String INIT_ORIENTATION;
+    static int INIT_X = 0;
+    static int INIT_Y = 0;
+    static String INIT_ORIENTATION = null;
     static boolean isPlaced = false;
 
     /**
@@ -43,6 +44,11 @@ public class ToyRobotSimulator {
 
     /**
      * Enums
+     */
+
+    /**
+     * Place command not included as it is treated
+     * differently from other commands.
      */
     enum Command {
         MOVE,
@@ -83,9 +89,9 @@ public class ToyRobotSimulator {
         if(!isPlaced) {
             isPlaced = true;
         }
-        X = INIT_X;
-        Y = INIT_Y;
-        ORIENTATION = Orientation.valueOf(INIT_ORIENTATION);
+        ACTUAL_POSITION_X = INIT_X;
+        ACTUAL_POSITION_Y = INIT_Y;
+        ACTUAL_ORIENTATION = Orientation.valueOf(INIT_ORIENTATION);
     }
 
     static void execute(String commandStr) {
@@ -108,48 +114,48 @@ public class ToyRobotSimulator {
                 report();
                 break;
             default:
-                // do nothing;
+                // do nothing
         }
     }
 
     static void move() {
-        int resX = X;
-        int resY = Y;
-        switch (ORIENTATION) {
+        int tempX = ACTUAL_POSITION_X;
+        int tempY = ACTUAL_POSITION_Y;
+        switch (ACTUAL_ORIENTATION) {
             case NORTH:
-                resY = Y + 1;
+                tempY = ACTUAL_POSITION_Y + 1;
                 break;
             case SOUTH:
-                resY = Y - 1;
+                tempY = ACTUAL_POSITION_Y - 1;
                 break;
             case EAST:
-                resX = X + 1;
+                tempX = ACTUAL_POSITION_X + 1;
                 break;
             case WEST:
-                resX = X - 1;
+                tempX = ACTUAL_POSITION_X - 1;
                 break;
             default:
                 // do nothing
         }
-        if(isCoordinatesValid(resX, resY)) {
-            X = resX;
-            Y = resY;
+        if(isCoordinatesValid(tempX, tempY)) {
+            ACTUAL_POSITION_X = tempX;
+            ACTUAL_POSITION_Y = tempY;
         }
     }
 
     static void left() {
-        switch (ORIENTATION) {
+        switch (ACTUAL_ORIENTATION) {
             case NORTH:
-                ORIENTATION = Orientation.WEST;
+                ACTUAL_ORIENTATION = Orientation.WEST;
                 break;
             case SOUTH:
-                ORIENTATION = Orientation.EAST;
+                ACTUAL_ORIENTATION = Orientation.EAST;
                 break;
             case EAST:
-                ORIENTATION = Orientation.NORTH;
+                ACTUAL_ORIENTATION = Orientation.NORTH;
                 break;
             case WEST:
-                ORIENTATION = Orientation.SOUTH;
+                ACTUAL_ORIENTATION = Orientation.SOUTH;
                 break;
             default:
                 // do nothing
@@ -157,18 +163,18 @@ public class ToyRobotSimulator {
     }
 
     static void right() {
-        switch (ORIENTATION) {
+        switch (ACTUAL_ORIENTATION) {
             case NORTH:
-                ORIENTATION = Orientation.EAST;
+                ACTUAL_ORIENTATION = Orientation.EAST;
                 break;
             case SOUTH:
-                ORIENTATION = Orientation.WEST;
+                ACTUAL_ORIENTATION = Orientation.WEST;
                 break;
             case EAST:
-                ORIENTATION = Orientation.SOUTH;
+                ACTUAL_ORIENTATION = Orientation.SOUTH;
                 break;
             case WEST:
-                ORIENTATION = Orientation.NORTH;
+                ACTUAL_ORIENTATION = Orientation.NORTH;
                 break;
             default:
                 // do nothing
@@ -176,13 +182,12 @@ public class ToyRobotSimulator {
     }
 
     static void report() {
-        System.out.printf("Output: %s,%s,%s%n", X, Y, ORIENTATION);
+        System.out.printf("Output: %s,%s,%s%n", ACTUAL_POSITION_X, ACTUAL_POSITION_Y, ACTUAL_ORIENTATION);
     }
 
     /**
      * Utility methods
      */
-
     static boolean isCoordinatesValid(int x, int y) {
         return x >= 0 && x < DIMENSION_X && y >= 0 && y < DIMENSION_Y;
     }
@@ -209,5 +214,21 @@ public class ToyRobotSimulator {
         }
         INIT_ORIENTATION = placeCommandParams[PLACE_COMMAND_PARAMS_ORIENTATION_INDEX];
         return Orientation.isValid(INIT_ORIENTATION) && isCoordinatesValid(INIT_X, INIT_Y);
+    }
+
+    /**
+     * Resets all robot placeholder variables.
+     * Utility method used in tests
+     */
+    static void reset() {
+        ACTUAL_POSITION_X = 0;
+        ACTUAL_POSITION_Y = 0 ;
+        ACTUAL_ORIENTATION = null;
+
+        INIT_X = 0;
+        INIT_Y = 0;
+        INIT_ORIENTATION = null;
+
+        isPlaced = false;
     }
 }
