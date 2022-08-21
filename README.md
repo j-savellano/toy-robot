@@ -88,7 +88,7 @@ Output: 0,0,WEST
 ```
 
 # Running The Tests
-Running the project's integration and unit tests follows the same process as explained in **_Running The Program_** section of this page, but this time the target file will be the `ToyRobotSimulatorTest.java` and we need to add `-ea` option to the `java` command to enable assertions inside the test cases.
+Running the project's integration and unit tests follows the same process as explained in **_Running The Program_** section of this page, but this time the target file will be the `ToyRobotSimulatorTest.java`. And we need to add `-ea` option to the `java` command to enable assertions inside the test cases, if we simply run `java ToyRobotSimulatorTest`, the assertions in the test cases will not be enforced and will produce inaccurate results.
 
 ```
 % javac ToyRobotSimulatorTest.java
