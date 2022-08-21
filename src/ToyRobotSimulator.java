@@ -32,15 +32,20 @@ public class ToyRobotSimulator {
     /**
      * Constant variables
      */
-    static int DIMENSION_X = 5;
-    static int DIMENSION_Y = 5;
-    static int PLACE_COMMAND_LENGTH = 2;
-    static int PLACE_COMMAND_INDEX = 0;
-    static int PLACE_COMMAND_PARAMS_INDEX = 1;
-    static int PLACE_COMMAND_PARAMS_LENGTH = 3;
-    static int PLACE_COMMAND_PARAMS_X_INDEX = 0;
-    static int PLACE_COMMAND_PARAMS_Y_INDEX = 1;
-    static int PLACE_COMMAND_PARAMS_ORIENTATION_INDEX = 2;
+    static final int DIMENSION_X = 5;
+    static final int DIMENSION_Y = 5;
+
+    static final String PLACE_COMMAND = "PLACE";
+    static final String PLACE_COMMAND_DELIMITER = " ";
+    static final String PLACE_COMMAND_PARAMS_DELIMITER = ",";
+    
+    static final int PLACE_COMMAND_LENGTH = 2;
+    static final int PLACE_COMMAND_INDEX = 0;
+    static final int PLACE_COMMAND_PARAMS_INDEX = 1;
+    static final int PLACE_COMMAND_PARAMS_LENGTH = 3;
+    static final int PLACE_COMMAND_PARAMS_X_INDEX = 0;
+    static final int PLACE_COMMAND_PARAMS_Y_INDEX = 1;
+    static final int PLACE_COMMAND_PARAMS_ORIENTATION_INDEX = 2;
 
     /**
      * Enums
@@ -193,16 +198,16 @@ public class ToyRobotSimulator {
     }
 
     static boolean isPlaceCommand(String command) {
-        String[] placeCommand = command.split(" ");
+        String[] placeCommand = command.split(PLACE_COMMAND_DELIMITER);
         if(placeCommand.length != PLACE_COMMAND_LENGTH) {
             return false;
         }
-        return placeCommand[PLACE_COMMAND_INDEX].equals("PLACE")
+        return PLACE_COMMAND.equals(placeCommand[PLACE_COMMAND_INDEX])
                 && isPlaceCommandParamsValid(placeCommand[PLACE_COMMAND_PARAMS_INDEX]);
     }
 
     static boolean isPlaceCommandParamsValid(String placeParams) {
-        String[] placeCommandParams = placeParams.split(",");
+        String[] placeCommandParams = placeParams.split(PLACE_COMMAND_PARAMS_DELIMITER);
         if(placeCommandParams.length != PLACE_COMMAND_PARAMS_LENGTH) {
             return false;
         }
