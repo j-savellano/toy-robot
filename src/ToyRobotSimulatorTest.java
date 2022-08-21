@@ -191,7 +191,7 @@ public class ToyRobotSimulatorTest {
     }
 
     private static void integrationTest_multiplePlaceCommands() {
-        testName = "Integration Test - Scenario 6";
+        testName = "Integration Test - Multiple Place Commands";
         input = String.join(System.lineSeparator(), "PLACE 0,0,NORTH", "REPORT", "PLACE 4,4,SOUTH", "REPORT", "PLACE 0,4,WEST", "REPORT", "PLACE 4,0,EAST", "REPORT");
         expectedOutput = "Output: 0,0,NORTH\nOutput: 4,4,SOUTH\nOutput: 0,4,WEST\nOutput: 4,0,EAST\n";
 
