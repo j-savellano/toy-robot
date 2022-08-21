@@ -28,6 +28,7 @@ Steps to download:
 ### Verify Project Download
 After cloning or downloading (and unzipping) the project, you should see the following files inside the project. If you're on Mac, you can use these commands to check:
 ```
+% cd <project_location>
 % ls
 toy-robot-v1
 % cd toy-robot-v1 
