@@ -3,7 +3,7 @@ A simple Java program that simulates a robot that is able to roam on a "table to
 
 # Getting Started
 ### Project Download
-No installation is needed to run the program but you need to clone the project or download the project zip file to your machine.
+No project installation is needed to run the program but you need to clone the project or download the project zip file to your machine.
 
 #### 1. Clone
 Cloning requires you to have [git](https://git-scm.com/) installed on your machine. If you do have it installed, you can run the command:
@@ -66,7 +66,7 @@ If you followed the example above on the **_Verify Project Download_** section o
 1. `ToyRobotSimulator.java`
 2. `ToyRobotSimulatorTest.java`
 
-Our only concern for now is the file `ToyRobotSimulator.java` as this is the file we need in order to run the program. The other file `ToyRobotSimulatorTest.java` is discussed on the **_Running The Tests_** section of this page.
+Our only concern for now is the file `ToyRobotSimulator.java` as this is the file we need in order to run the program.
 
 To run the program, please execute the following commands:
 
