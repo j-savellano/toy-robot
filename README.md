@@ -95,7 +95,7 @@ Running the project's integration and unit tests follows the same process as exp
 % java -ea ToyRobotSimulatorTest
 ```
 
-You should see the printed text displayed below at the last part after executing the `java ToyRobotSimulatorTest` command.
+You should see the printed text displayed below at the last part after executing the `java -ea ToyRobotSimulatorTest` command.
 
 ```
 #####################
