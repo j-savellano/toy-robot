@@ -10,6 +10,7 @@ public class ToyRobotSimulatorTest {
         integrationTest_scenario3();
         integrationTest_scenario4();
         integrationTest_scenario5();
+        integrationTest_lowerCaseCommands();
         integrationTest_multiplePlaceCommands();
         integrationTest_mixedValidAndInvalidCommands();
         integrationTest_robotNotPlaced();
@@ -173,6 +174,27 @@ public class ToyRobotSimulatorTest {
                 "RIGHT", "MOVE", "MOVE", "MOVE", "MOVE", "REPORT",
                 "RIGHT", "MOVE", "MOVE", "MOVE", "MOVE", "REPORT");
         expectedOutput = "Output: 4,0,SOUTH\nOutput: 0,0,WEST\nOutput: 0,4,NORTH\nOutput: 4,4,EAST\n";
+
+        setupInputOutputStream();
+        printTestDetails();
+
+        ToyRobotSimulator.main(new String[0]);
+
+        try {
+            assert expectedOutput.equals(outputStream.toString());
+        } catch (AssertionError e) {
+            failedTestsCount++;
+            isEveryTestPassing = false;
+            printErrDetails();
+        } finally {
+            ToyRobotSimulator.reset();
+        }
+    }
+
+    private static void integrationTest_lowerCaseCommands() {
+        testName = "Integration Test - Lower Case Commands";
+        input = String.join(System.lineSeparator(), "place 0,0,NORTH", "left", "report");
+        expectedOutput = "Output: 0,0,WEST\n";
 
         setupInputOutputStream();
         printTestDetails();
