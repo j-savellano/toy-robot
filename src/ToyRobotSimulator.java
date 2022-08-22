@@ -6,7 +6,7 @@ public class ToyRobotSimulator {
         Scanner scanner = new Scanner(System.in);
         String commandStr;
         while (scanner.hasNextLine()) {
-            commandStr = scanner.nextLine().trim();
+            commandStr = scanner.nextLine().trim().toUpperCase();
             if(isPlaceCommand(commandStr)) {
                 place();
             } else if(Command.isValid(commandStr)) {
